@@ -1,0 +1,2 @@
+\beamer@endinputifotherversion {3.26pt}
+\beamer@sectionintoc {1}{3D-COS3-10248}{2}{0}{1}
