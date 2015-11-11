@@ -1,6 +1,6 @@
 order for programmes of Karen & Myriam - created by Tabatha - 04/11/15 - Plot Luminosity profile :
 
-here my object is J132123.
+here my object is J094949.
 
 1) create a catalog_input : 
 - name of object
@@ -16,13 +16,12 @@ here my object is J132123.
 	analysis
 	isophote
 	epar geompar to change maxsma (400)
-	cl < J132123_guess.cl
-5) SPAWN,"awk '{print $1,$2,$3,$6,$7,8,$9,$10,$12,$22,$23,$25}' /Users/tabatha/Documents/these/images/SUSI2/fitprofile_t/J132123/fit_idl_SB_Profile/sorties/J132123_ellipse_Guess.dat > /Users/tabatha/Documents/these/images/SUSI2/fitprofile_t/J132123/fit_idl_SB_Profile/sorties/J132123_ellipse_Guess2.dat"
-6) Ellipse_maker_all.pro
-7) IRAF :
-	cl < J132123_ellipse.cl
-8) SPAWN,"awk '{print $1,$2,$3,$6,$7,8,$9,$10,$12,$22,$23,$25}' /Users/tabatha/Documents/these/images/SUSI2/fitprofile_t/J132123/fit_idl_SB_Profile/sorties/J132123_ellipse.dat > /Users/tabatha/Documents/these/images/SUSI2/fitprofile_t/J132123/fit_idl_SB_Profile/sorties/J132123_ellipse2.dat" ;Because the table created by Myriam is not good to read columns
-9) SB_PROFILE_ALL.pro
-10) SUM_FRAMES.pro ;just for the sum of several bands
-11) PA_E_FromEllipse.pro
-12) Fit_1D_SB_all.pro ?
+	cl < J094949_guess.cl
+5) Ellipse_maker_all.pro
+6) IRAF :
+	cl < J094949_ellipse.cl
+7) SB_PROFILE_ALL.pro
+8) SUM_FRAMES.pro ;just for the sum of several band
+9) find the background value if we have not a ZP
+10) PA_E_FromEllipse_all.pro
+11) Fit_1D_SB_all.pro 
