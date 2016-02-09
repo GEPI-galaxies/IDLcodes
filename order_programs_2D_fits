@@ -1,0 +1,95 @@
+What program do you need in your directory to obtain a Galfit 2D profile of your galaxy ?
+
+alogscale.pro
+CATALOG_INPUT
+COMPUTE_CENTER_ALL.pro
+COMPUTE_CENTER.pro
+Config_Ellipse.pro
+Config_prep_Galfit.pro
+Config_rhalf.pro
+cut_images.pro
+default.conv
+default.nnw
+default.param
+default.sex
+Ds9_make.pro
+Fit_1D_SB_all_kpc.pro
+Fit_1D_SB_all.pro
+FIT_1D_SB_Profile_kpc.pro
+FIT_1D_SB_Profile.pro
+GALFIT_ALL.pro
+GALFIT_galaxy.pro
+Galfit_out_all.pro
+galout_images.pro
+img2profile.pro
+img2ps.pro
+init_galfitfile.pro
+make_page_tex.pro
+MAKE_TABLE_TEX.pro
+matchdelim.pro
+mpfit.pro
+mpfitexpr.pro
+mpfitfun.pro
+nexttok.pro
+order_programmes.txt
+PA_E_FromEllipse_all.pro
+PA_E_fromEllipse.dat
+PA_E_FromEllipse.pro
+PAUSE.pro
+pix2kpc.pro
+plotprofile.pro
+Prep_Galfit_all.pro
+Prep_images_Galfit.pro
+PSF_maker.pro
+rd_tfile.pro
+RDFILE.pro
+readlog.pro
+Run_sextractor.pro
+SB_PROFILE_ALL.pro
+SB_PROFILE.pro
+Sersic_1D.pro
+Sextractor_morpho_all.pro
+Sextractor_morpho.pro
+showtex.pro
+str_token.pro
+strcnt.pro
+strcomponent__define.pro
+strn.pro
+strtrans.pro
+sub_sup_idl.pro
+Sum_frames.pro
+Template_ellipse.dat
+textable.pro
+textoidl.pro
+translate_sub_super.pro
+
+
+
+Order for programmes of Karen & Myriam - Galfit profile :
+
+0) create a catalog_input : 
+	name of object
+	file (.fits)
+	redshift
+	pix_size
+	ZP (put 0 if it doesn't exist)
+0bis) cut your image with cut_images.pro if it's too large
+
+1) Check if all name of files and directory are ok in :
+	Config_Ellipse.pro
+	Config_prep_Galfit.pro
+	Config_rhalf.pro
+2) Sextractor_morpho_all.pro
+3) COMPUTE_CENTER_ALL.pro
+4) IRAF : 
+	stsdas
+	isophote
+	epar geompar to change max_kpc
+	cl < name.cl
+5) SB_PROFILE_ALL.pro
+6) SUM_FRAMES.pro --> just for the sum of several band, if not you can copy/paste twice name_obj.fits and rename name_sum.fits and name_sum_clean.fits
+7) PA_E_FromEllipse_all.pro --> find the background value if we have not a ZP (see PA_E_FromEllipse_all)
+8) Fit_1D_SB_all.pro (and Fit_1D_SB_all_kpc.pro (not necessary) to have x_axis in kpc)
+9) PSF_maker.pro (see MOFAT of stars in the image with IRAF to have the average value of FWHM, see if it seems to correspond with the seeing of your observations and put the value in the program)
+10) GALFIT_ALL.pro --> Change "step" which you want in GALFIT_ALL if you want to skip some steps
+ 
