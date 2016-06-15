@@ -1,13 +1,13 @@
 ; Config_Ellipse
 ;
-PATH_CATALOGUE = '/Users/hypatia/Documents/IMAGES_Kinematics/3D_HST/Catalogue/'
+PATH_CATALOGUE = '../'
 PATH_DATA = '/Users/hypatia/Documents/IMAGES_Kinematics/3D_HST/Imagery/Cutimages_15arcsec/'
-CATALOGUE_INPUT = 'Galfit_3DHST_input.cat'
+CATALOGUE_INPUT = 'catalogue_morpho.cat'
 
 ; Create Sum bands
 ;BANDS=['I','J','H']
 BANDS=['H']
-SUFIXE_sum='_sum.fits'
+SUFFIXE_im='_obj.fits'
 PATH_SUM = '/Users/hypatia/Documents/IMAGES_Kinematics/3D_HST/Imagery/Sum/'
 SEX_DETECT_THRESH =2.5
 SEX_ANALYSIS_THRESH = 3.

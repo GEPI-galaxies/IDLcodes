@@ -1,6 +1,6 @@
 ; Configuration File for R_halh calculation 
 ; 
-PATH_CATALOGUE = '/Users/hypatia/Documents/IMAGES_Kinematics/3D_HST/Catalogue/'
+PATH_CATALOGUE = '../'
 PATH_DATA = '/Users/hypatia/Documents/IMAGES_Kinematics/3D_HST/Imagery/Cutimages_15arcsec/'
 PATH_OUT = '/Users/hypatia/Documents/IMAGES_Kinematics/3D_HST/Rhalf/'
 

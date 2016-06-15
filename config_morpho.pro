@@ -1,15 +1,19 @@
 PATH_CATALOGUE = '../'
-PATH_DATA = '/Users/hypatia/Documents/IMAGES_Kinematics/3D_HST/Imagery/Cutimages_15arcsec/'
-PATH_OUT = '/Users/hypatia/Documents/IMAGES_Kinematics/3D_HST/Rhalf/'
+PATH_DATA = '../'    
+PATH_OUT = ''
 
 ; The Input Catalogue must have the following columns 
 ; Name,Input_file(fits file),redshift,pix_size, ZP
-FILTER = 'J' ; not used yet
-CATALOGUE_INPUT = 'Rhalh_3DHST_input.cat'
+CATALOGUE_INPUT = 'catalogue_morpho.cat'
+
+; Sextractor_files => pas utile ici, il faut copier les fichiers dans
+;le repertoire courant
+;CONF_FILE='default.sex'
+;PARAM_FILE='default.param'
+;NNW_FILE='default.nnw'
+;CONV_FILE='default.conv'
 
 ;Detection threshold for sextractor
-SEX_DETECT_THRESH =3.5
-SEX_ANALYSIS_THRESH = 3.5
-
-; Output Catalogue
-CATALOGUE_RHALF ='Rhalf_3DHST_output.cat'
+DETECT_THRESH=1.0
+ANALYSIS_THRESH=1.0
+DETECT_MINAREA=10.

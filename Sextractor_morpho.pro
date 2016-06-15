@@ -28,17 +28,16 @@
 ;
 ; MODIFICATION HISTORY:
 ;       Created by Myriam R. 28/04/2015 
+;       Mofified by Karen D. 15/06/2015
 ; 
 
-PRO Sextractor_morpho, INFILE, ZP, OBJFILE, SEGFILE, MASKFILE, OUTFILE , RUN_SEX=RUN_SEX , MASK_INPUT=MASK_INPUT, DETECT_THRESH=DETECT_THRESH, ANALYSIS_THRESH=ANALYSIS_THRESH
+PRO Sextractor_morpho, INFILE, ZP, OBJFILE, SEGFILE, MASKFILE, OUTFILE
 
 	im = readfits(INFILE,/SILENT,header) ; Load image
 	nx=n_elements(im(*,1))
 	ny=n_elements(im(1,*))
-
-	;Run Sextractor and reading output files
 	
-	if KEYWORD_SET(RUN_SEX) then  Run_sextractor, INFILE , ZP, SEGFILE, MASKFILE, OUTFILE , DETECT_THRESH=DETECT_THRESH, ANALYSIS_THRESH=ANALYSIS_THRESH
+	
 	seg = readfits(SEGFILE,/SILENT) ; Load the segmentation map from Sextractor
 	READCOL,OUTFILE,xcc,ycc,sky,Flux,area,rad,PA,ratio,ellip, FORMAT = '(F,F,F,F,F,F,F,F,F)'
 
@@ -51,13 +50,13 @@ PRO Sextractor_morpho, INFILE, ZP, OBJFILE, SEGFILE, MASKFILE, OUTFILE , RUN_SEX
 	
 	print,'Detect object at position:'
 	print,'X='+string(xcc(n_obj))+"Y="+string(ycc(n_obj))+" PA="+string(PA(n_obj))+' Ratio a/b='+string(ratio(n_obj))
-    			BsurA2=ratio(n_obj)
-                Re2=sqrt(area(n_obj)/3.141592654)/2.      
-                PA2=PA(n_obj) -90. ;;; PA=0 for the (0,1) coord in IDL while (1,0) for Sextractor ; counterclock
-                xc2=xcc(n_obj)
-                yc2=ycc(n_obj)
-                Fluxtot2=Flux(n_obj)
-                sky2=sky(n_obj)    
+        AsurB2=ratio(n_obj)
+        Re2=sqrt(area(n_obj)/3.141592654)/2.      
+        PA2=PA(n_obj) -90. ;;; PA=0 for the (0,1) coord in IDL while (1,0) for Sextractor ; counterclock
+        xc2=xcc(n_obj)
+        yc2=ycc(n_obj)
+        Fluxtot2=Flux(n_obj)
+        sky2=sky(n_obj)    
 	
 	print,'N# of contaminating object:' + string(n_elements(xcc) -1)
 	Contaminated_index = WHERE(seg NE obj_value AND seg GT 0, n_conta)	
@@ -65,17 +64,17 @@ PRO Sextractor_morpho, INFILE, ZP, OBJFILE, SEGFILE, MASKFILE, OUTFILE , RUN_SEX
 
 	if ~KEYWORD_SET(MASK_INPUT) then begin
 	;Create Mask for contaminating objects
-	mask=im *0.0 +1.0
-	IF n_conta GE 1 then begin
-		for i=0, n_elements(Contaminated_index) -1 do begin
-		mask[Contaminated_array[0,i],Contaminated_array[1,i]]=0.
-		endfor
-	ENDIF	
-	sxaddpar,header,'TYPE','MASK'
-	writefits,MASKFILE,mask,header 
-	endif else begin
-	mask = readfits(MASK_INPUT,/SILENT) 
-	endelse
+           mask=im *0.0 +1.0
+           IF n_conta GE 1 then begin
+              for i=0, n_elements(Contaminated_index) -1 do begin
+                 mask[Contaminated_array[0,i],Contaminated_array[1,i]]=0.
+              endfor
+           ENDIF	
+           sxaddpar,header,'TYPE','MASK'
+           writefits,MASKFILE,mask,header 
+        endif else begin
+           mask = readfits(MASK_INPUT,/SILENT) 
+        endelse
  	
 	; Replace by sky in the contaminated regions
 	sky,im(WHERE(mask EQ 1)),skymode,skyvar,/SILENT ;estimate sky background
@@ -85,7 +84,7 @@ PRO Sextractor_morpho, INFILE, ZP, OBJFILE, SEGFILE, MASKFILE, OUTFILE , RUN_SEX
 	sxaddpar,header,'XCENTER',string(xc2)
 	sxaddpar,header,'YCENTER',string(yc2)
 	sxaddpar,header,'PA',string(PA2)
-	sxaddpar,header,'ELLIP',string(BsurA2)
+	sxaddpar,header,'ELONG',string(AsurB2)
 	sxaddpar,header,'RADIUS',string(Re2)
 	sxaddpar,header,'FLUXTOT',string(Fluxtot2)
 	
