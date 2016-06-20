@@ -1,6 +1,12 @@
-;; code idl rassemblant compute_center et ellipse_maker
-
-;; 2 modes de fonctionnement : avant et apres
+; 
+; Create iraf routine for ellipse fitting
+;
+; INPUT : 
+;		OBJECT 	 = Object_name
+; 		FILE_IN  = input file		 
+; 		Path_OUT = Path of the output files
+; 		ZP = magnitude zero point of the image
+; 
 
 PRO Ellipse_iraf, OBJECT, FILE_IN, PATH_OUT, ZP, step=step
 
@@ -38,7 +44,8 @@ IF STRMATCH(step,'guess') THEN BEGIN
    Cmd_Y0 = "'s%$YCENTER%INDEF%' "
    Cmd_centerFlag = "'s%$recente_FLAG%yes%' "
 ENDIF ELSE IF STRMATCH(step,'final') THEN BEGIN
-   readcol,FILE_GUESS,format='(i,f,f,f,f,f,f,f,f,f)', row,sma,Int,I_err,E,E_err,PA,PA_err,xc,yc
+   print,'reading '+ FILE_GUESS
+   readcol,FILE_GUESS,format='(i,f,f,f,f,f,f,f,f,f)', row,sma,Int,I_err,E,E_err,PA,PA_err,xc,yc,/SILENT
    centerX=STRCOMPRESS(string(mean(xc)),/REMOVE_ALL)
    centerY=STRCOMPRESS(string(mean(yc)),/REMOVE_ALL)
 
@@ -73,12 +80,15 @@ IF STRMATCH(step,'guess') THEN BEGIN
    ENDFOR
    FREE_LUN,unit
 ENDIF
+
 ;;;; open an iraf term and follow this : 
 ;; > cl
 ;; > stsdas
 ;; > analysis
 ;; > isophote
 ;; > cl < script_guess.cl
+;; parameters for the ellipse fitting can be changed via epar geom and
+;; for display via epar isoimap 
 
 ;;; second step
 IF STRMATCH(step,'final') THEN BEGIN
