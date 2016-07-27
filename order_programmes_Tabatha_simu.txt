@@ -1,0 +1,6 @@
+Pour une image 4000x4000 pixels de 60x60 kpc avec une galaxie simulée dans l'image centrée face-on:
+
+1) binning_densite.pro
+2) iraf --> blkvg
+3) bruit.pro
+4) GALFIT_ALL.pro
