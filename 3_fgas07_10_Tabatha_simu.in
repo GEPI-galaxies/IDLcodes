@@ -1,0 +1,50 @@
+# IMAGE PARAMETERS
+A) 3_fgas07_10.fits                  # Input data image (FITS file)
+B) 3_fgas07_10_galout.fits          # Name for the output image
+C) none            # Noise image name
+D) psf.fits           # Input PSF image 
+E) 1                                      # PSF oversampling factor relative to data
+F) none             # Bad pixel mask(FITS image or ASCII coord list)
+G) none                                 # File with parameter constraints (ASCII file)
+H) 1 400 1 400                                   # Image region to fit (xmin xmax ymin ymax)
+I) 400   400                                     # Size of convolution box (x y)
+J) 26.0                                   # Magnitude photometric zeropoint
+K) 1  1                                # Plate scale (dx dy)    [arcsec per pixel]
+O) regular                                       # Display type (regular, curses, both)
+P) 0                                             # Create output image only? (1=yes; 0=optimize)
+
+
+# Sersic function
+0) sersic                      # Object type
+1) 200 200 1 1 #498.474  502.769  1  1      # position x, y        [pixel]
+3) 21.     1               # total magnitude
+4) 7.73     1               #     R_e              [Pixels]
+5) 1.66         1               # Sersic exponent (deVauc=4, expdisk=1)
+6) 0.0000      0               #     ----- 
+7) 0.0000      0               #     ----- 
+8) 0.0000      0               #     ----- 
+9) 1.0    0               # axis ratio (b/a)
+10) 0.0    0               # position angle (PA)  [Degrees: Up=0, Left=90]
+Z) 0                           # output image (see above)
+
+
+# Expdisk
+0) expdisk                     # Object type
+1) 200 200 1 1 #498.474  502.769  1  1      # position x, y        [pixel]
+3) 20.4     0               # total magnitude
+4) 32.0    0               #     R_e              [Pixels]
+5) 1.0         0               # Sersic exponent (deVauc=4, expdisk=1)
+6) 0.0000      0               #     ----- 
+7) 0.0000      0               #     ----- 
+8) 0.0000      0               #     ----- 
+9) 1.0    0               # axis ratio (b/a)
+10) 0.0     0               # position angle (PA)  [Degrees: Up=0, Left=90]
+Z) 0                           # output image (see above)
+
+
+# sky
+0) sky 
+1) 0.1   1               # sky background       [ADU counts]
+2) 0.000        0              # dsky/dx (sky gradient in x)
+3) 0.000        0              # dsky/dy (sky gradient in y)
+Z) 0                           # output image
